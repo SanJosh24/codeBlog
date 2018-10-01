@@ -6,7 +6,7 @@ const passport   = require('passport');
 const bcrypt     = require('bcryptjs');
 
 // require the user model !!!!
-const user       = require('./models/user');
+const user       = require('../models/user');
 
 
 authRoutes.post('/signup', (req, res, next) => {

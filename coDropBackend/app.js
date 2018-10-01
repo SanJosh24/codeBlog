@@ -11,7 +11,8 @@ const path         = require('path');
 const cors         = require('cors');
 const LocalStrategy = require("passport-local").Strategy;
 const flash         = require("flash");
-// const user       = require('./models/user');
+const user       = require('./models/user');
+const bcrypt      = require("bcryptjs");
 
 const session       = require('express-session');
 const passport      = require('passport');
@@ -96,7 +97,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000"]
+    origin: ["http://localhost:5000"]
   })
 );
 
@@ -109,4 +110,6 @@ app.use('/', index);
 const authRoutes = require('./routes/authroutes');
 app.use('/api', authRoutes);
 
+const profileRoutes = require('./routes/profileRoutes')
+app.use('/api', authRoutes)
 module.exports = app;
