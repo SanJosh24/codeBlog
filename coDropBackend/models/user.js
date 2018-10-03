@@ -6,9 +6,11 @@ const userSchema = new Schema({
   username: String,
   password: String,
   email: String,
-  blogs: Array,
-  clans: Array,
-  favoriteUser: Array,
+  blogs: [{ type: Schema.Types.ObjectId, ref: "blogs" }],
+  clan: Array,
+  favoritedBy: [{ type: Schema.Types.ObjectId}],
+  favoriteUsers: [{ type: Schema.Types.ObjectId}],
+  hierarchy: String,
   imageurl: String
 }, {
   timestamps: {

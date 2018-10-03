@@ -111,5 +111,12 @@ const authRoutes = require('./routes/authroutes');
 app.use('/api', authRoutes);
 
 const profileRoutes = require('./routes/profileRoutes')
-app.use('/api', authRoutes)
+app.use('/api', profileRoutes)
+
+const blogsRoutes = require('./routes/blogsRoutes')
+app.use('/api', blogsRoutes)
+
+const clanRoutes = require('./routes/clanRoutes')
+app.use('/api', clanRoutes)
+
 module.exports = app;

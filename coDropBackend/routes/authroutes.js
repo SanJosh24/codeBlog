@@ -14,8 +14,10 @@ authRoutes.post('/signup', (req, res, next) => {
     const password = req.body.password;
     const email = req.body.email;
     var blogs;
-    var clans;
+    var clan;
+    var favoritedBy;
     var favoriteUser;
+    var hierarchy;
     var imageurl;
   
     if (!username || !password) {
@@ -48,8 +50,10 @@ authRoutes.post('/signup', (req, res, next) => {
             password: hashPass,
             email: email,
             blogs: blogs,
-            clans: clans,
+            clan: clan,
+            favoritedBy: favoritedBy,
             favoriteUser: favoriteUser,
+            hierarchy: hierarchy,
             imageurl: imageurl
         });
   

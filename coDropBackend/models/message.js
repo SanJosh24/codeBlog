@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
 
-const blogSchema = new Schema({
+const messageSchema = new Schema({
   title: String,
   description: String,
-  owner: String,
-  likes: Array,
-  public: Boolean
+  from: String,
+  to: String
 }, {
   timestamps: {
     createdAt: "created_at",
@@ -14,6 +13,6 @@ const blogSchema = new Schema({
   }
 });
 
-const blog = mongoose.model("blog", blogSchema);
+const message = mongoose.model("message", messageSchema);
 
-module.exports = blog;
+module.exports = message;

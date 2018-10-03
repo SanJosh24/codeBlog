@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
 
-const blogSchema = new Schema({
-  title: String,
+const clanSchema = new Schema({
+  name: String,
   description: String,
   owner: String,
-  likes: Array,
-  public: Boolean
+  users: [{ type: Schema.Types.ObjectId }]
 }, {
   timestamps: {
     createdAt: "created_at",
@@ -14,6 +13,6 @@ const blogSchema = new Schema({
   }
 });
 
-const blog = mongoose.model("blog", blogSchema);
+const clan = mongoose.model("clan", clanSchema);
 
-module.exports = blog;
+module.exports = clan;
