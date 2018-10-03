@@ -3,9 +3,9 @@ const Schema   = mongoose.Schema;
 
 const messageSchema = new Schema({
   title: String,
-  description: String,
-  from: String,
-  to: String
+  body: String,
+  senderId: String,
+  recieverId: String
 }, {
   timestamps: {
     createdAt: "created_at",
@@ -13,6 +13,6 @@ const messageSchema = new Schema({
   }
 });
 
-const message = mongoose.model("message", messageSchema);
+const Message = mongoose.model("Message", messageSchema);
 
-module.exports = message;
+module.exports = Message;

@@ -20,13 +20,19 @@ profileRoutes.get('/profile/:id', (req, res, next) => {
 		.catch(next);
 });
 
-// GET route => to get all the blogs created by user
+// // GET route => to get all the blogs created by user
 
-profileRoutes.get('/blogs', (req, res, next) => {
-	blog
-		.find()
+profileRoutes.get('/profile/:id/blogs', (req, res, next) => {
+
+  var tempArray = [];
+	blog.find()
 		.then((blogs) => {
-			res.json(blogs);
+      blogs.forEach((oneBlog) => {
+        if (oneBlog.owner.includes(req.user.favoriteUsers)){
+          tempArray.push(oneBlog)
+        }
+      });
+			res.json({ tempArray });
 		})
 		.catch((err) => {
 			res.json(err);
@@ -90,5 +96,34 @@ profileRoutes.post('/profile/postPrivate', (req, res, next) => {
 			res.json(err);
 		});
 });
+
+// POST route => to have the current user favorite current profile's user
+profileRoutes.post('/profile/:id/favorite', (req, res, next) => {
+	user
+    .findById(req.params.id)
+		.then((theFavoritedAccount) => {
+      if (theFavoritedAccount.favoritedBy.toString().includes(req.user._id.toString())) { // see if any of them are equal to req.user._id
+        req.user.favoriteUsers.pull(theFavoritedAccount._id);
+        theFavoritedAccount.favoritedBy.pull(req.user._id); // if there is one pull from array
+			} else {
+        req.user.favoriteUsers.push(theFavoritedAccount._id);
+				theFavoritedAccount.favoritedBy.push(req.user._id); // if not push to likes array
+			}
+			theFavoritedAccount
+        .save() // theFavoritedAccount.save .then
+        req.user.save()
+				.then((res) => {
+					res.json(res);
+				})
+				.catch((err) => {
+					res.json(err);
+				});
+		})
+		.catch((err) => {
+			res.json(err);
+		});
+});
+
+
 
 module.exports = profileRoutes;

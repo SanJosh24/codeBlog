@@ -23,7 +23,7 @@ clanRoutes.post('/clan/create', (req, res, next) => {
 		})
 		.then((response) => {
 			user
-				.findByIdAndUpdate(req.user._id, { $push: { clan: req.body.name } })
+				.findByIdAndUpdate(req.user._id, { $push: {clan: req.body.name } })
 				.then((theResponse) => {
 					res.json(theResponse);
 				})
@@ -37,7 +37,7 @@ clanRoutes.post('/clan/create', (req, res, next) => {
 		});
 });
 
-// GET route => to get a specific Clan/detailed view
+// GET route => to get a specific clan/detailed view
 
 clanRoutes.get('/clan/:id', (req, res, next) => {
 	clan
@@ -50,7 +50,7 @@ clanRoutes.get('/clan/:id', (req, res, next) => {
 		});
 });
 
-// PUT route => to update a specific clan
+// PUT route => to update a specific clan and neglet unauthorized users
 
 clanRoutes.put('/clan/:id', (req, res, next) => {
 	clan
@@ -68,7 +68,7 @@ clanRoutes.put('/clan/:id', (req, res, next) => {
 	clan
 		.findByIdAndUpdate(req.params.id, req.body)
 		.then(() => {
-			res.json({ message: `Clan with ${req.params.id} is updated successfully.` });
+			res.json({ message: `clan with ${req.params.id} is updated successfully.` });
 		})
 		.catch((err) => {
 			res.json(err);
@@ -78,10 +78,22 @@ clanRoutes.put('/clan/:id', (req, res, next) => {
 // DELETE route => to delete a specific clan
 
 clanRoutes.delete('/clan/:id', (req, res, next) => {
+  clan
+  .findById(req.params.id)
+  .then((x) => {
+    if (!req.user._id.equals(x.owner)) {
+      return res.json({
+        redirectUrl: '/'
+      })
+    }
+  })
+  .catch((err) => {
+    res.json(err);
+  });
 	clan
 		.findByIdAndRemove(req.params.id)
 		.then(() => {
-			res.json({ message: `Clan with ${req.params.id} is removed successfully.` });
+			res.json({ message: `clan with ${req.params.id} is removed successfully.` });
 		})
 		.catch((err) => {
 			res.json(err);
