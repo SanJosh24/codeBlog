@@ -119,4 +119,7 @@ app.use('/api', blogsRoutes)
 const clanRoutes = require('./routes/clanRoutes')
 app.use('/api', clanRoutes)
 
+const messageRoutes = require('./routes/messageRoutes')
+app.use('/api', messageRoutes)
+
 module.exports = app;

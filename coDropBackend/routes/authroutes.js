@@ -19,6 +19,7 @@ authRoutes.post('/signup', (req, res, next) => {
     var favoriteUser;
     var hierarchy;
     var imageurl;
+    var messages;
   
     if (!username || !password) {
       res.status(400).json({ message: 'Provide username and password' });
@@ -54,7 +55,8 @@ authRoutes.post('/signup', (req, res, next) => {
             favoritedBy: favoritedBy,
             favoriteUser: favoriteUser,
             hierarchy: hierarchy,
-            imageurl: imageurl
+            imageurl: imageurl,
+            messages: messages
         });
   
         aNewUser.save(err => {

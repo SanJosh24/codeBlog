@@ -11,7 +11,8 @@ const userSchema = new Schema({
   favoritedBy: [{ type: Schema.Types.ObjectId}],
   favoriteUsers: [{ type: Schema.Types.ObjectId}],
   hierarchy: String,
-  imageurl: String
+  imageurl: String,
+  messages: [{ type: Schema.Types.ObjectId}]
 }, {
   timestamps: {
     createdAt: "created_at",
