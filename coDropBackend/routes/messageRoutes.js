@@ -10,6 +10,8 @@ const user = require('../models/user');
 const blog = require('../models/blogs');
 const Message = require('../models/message')
 
+// GET route => to get all messages that user has
+
 messageRoutes.get('/profile/:id/messages', (req, res, next) => {
 	user
 		.findById(req.user._id).populate('messages')
@@ -18,6 +20,19 @@ messageRoutes.get('/profile/:id/messages', (req, res, next) => {
 		})
 		.catch(next);
 });
+
+// GET route => to get specific private message
+
+messageRoutes.get('/profile/:id/messages/:msgid', (req, res, next) => {
+	Message
+		.findById(req.params.msgid)
+		.then((res) => {
+			res.json(res);
+		})
+		.catch(next);
+});
+
+// POST route => to create a private message to the current user profile
 
 messageRoutes.post('/profile/:id/messages', (req, res, next) => {
 	Message
@@ -43,18 +58,29 @@ messageRoutes.post('/profile/:id/messages', (req, res, next) => {
 		});
 });
 
-// PUT route => to update a specific blog
+// PUT route => to update a specific message on sender user can update
 
-// messageRoutes.put('/profile/:id/messages', (req, res, next) => {
-// 	user
-// 		.findByIdAndUpdate(req.params.id.populate('messages'), req.body)
-// 		.then(() => {
-// 			res.json({ message: `blog with ${req.params.id} is updated successfully.` });
-// 		})
-// 		.catch((err) => {
-// 			res.json(err);
-// 		});
-// });
+messageRoutes.put('/profile/:id/messages/:msgid', (req, res, next) => {
+	Message.findById(req.params.msgid)
+	.then((themessage)=>{
+		if (!req.user._id.equals(themessage.senderId)) {
+			return res.json({
+				message: 'nah'
+			})
+		}
+			themessage.title = req.body.title
+			themessage.body = req.body.body
+			.then((res)=>{
+				res.json(res);
+			})
+			.catch((err)=>{
+				res.json(err);
+			})
+	})
+	.catch((err)=>{
+		res.json(err)
+	})
+});
 
 
 module.exports = messageRoutes;
