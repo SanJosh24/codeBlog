@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import Footer from './Footer'
 
 class LandingPage extends Component {
 	render() {
@@ -68,25 +69,7 @@ class LandingPage extends Component {
 						</div>
 					</div>
 				</div>
-
-				<footer>
-					<div className="copyright">
-						<p>© 2018 CoDrop, Inc. All Rights Reserved</p>
-					</div>
-					<div className="terms">
-						<p>
-							<a href="" className="term">
-								Terms of Use
-							</a>
-							<a href="" className="policy">
-								CoDrop Privacy Policy
-							</a>
-							<a href="" className="act">
-								CA Supply Chains Act
-							</a>
-						</p>
-					</div>
-				</footer>
+        <Footer/>
 			</div>
 		);
 	}

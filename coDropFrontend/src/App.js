@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import LandingPage from './components/LandingPage';
 import Signup from './components/Signup';
-import ClanList from './components/ClanList'
+import ClanList from './components/ClanList';
 
 class App extends Component {
   render() {
@@ -21,7 +21,7 @@ class App extends Component {
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/blogs" component={BlogsList}/>
           <Route exact path="/blogs/:id" component={BlogsDetails}/>
-          <Route exact path="/Clans" component={ClanList}/>
+          <Route exact path="/clans" component={ClanList}/>
         </Switch>
       </div>
     );

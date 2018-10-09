@@ -19,13 +19,14 @@ class Signup extends Component {
       email: this.state.email
     }
    
-    axios.post("http://localhost:5000/api/signup", {theTask})
-    .then( () => {
-      console.log("this is the current state when creating a task ------------------" , theTask)
+    axios.post(process.env.BASE_URL+"/signup", theTask)
+    // console.log("this is the current state when creating a task ------------------" , theTask)
+    .then( (response) => {
+      console.log("this is the current state when creating a task ------------------" , response)
         // this.props.getData();
         this.setState({username: "", password: "", email: ""});
     })
-    .catch( error => console.log(error) )
+    .catch( error => console.log('=-=-=-=-=-=-=-=-=-=-=-',error) )
     // console.log(this.state);
     
   }
@@ -44,18 +45,20 @@ class Signup extends Component {
   render() {
     return (
       <div className="Signup">
-          
-        <h1>Signup page!</h1>
+        <div>
         <form onSubmit={this.handleFormSubmit}>
           <label>Username</label>
-          <input type="text" name="username" value={this.state.username} onChange={e => this.handleChange(e)}/>
-          <label>Password</label>
-          <input type="password" name="password" value={this.state.password} onChange={e => this.handleChange(e)}/>
+          <input type="text" name="username" value={this.state.username} onChange={e => this.handleChange(e)} className="roundInput x" />
+          <br/>
           <label>Email</label>
-          <input type="text" name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
-
-          <button>Signup</button>
+          <input type="text" name="email" value={this.state.email} onChange={e => this.handleChange(e)} className="roundInput y"/>
+          <br/>
+          <label>Password</label>
+          <input type="password" name="password" value={this.state.password} onChange={e => this.handleChange(e)} className="roundInput z"/>
+          <br/>
+          <button className="buttonz xyz">Signup</button>
         </form>
+        </div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  min-height: 85vh;
 }
 
 .App-logo {
@@ -266,6 +267,47 @@ footer {
   display: flex;
   justify-content: center;
   height: 5vh;
+  position: relative;
+  bottom:0;
+  width:100%;
+}
+
+.Login {
+  background-image: url(/background.png);
+  background-size: cover;
+  z-index: -1; 
+  /* background: aliceblue; */
+  font-family: "Open Sans", Helvetica;
+  border-radius: 25px;
+  width: 360px;
+  margin: auto;
+  margin-top: 20vh;
+  border: 1px solid rgb(44, 177, 254);
+  box-shadow: 25px 40px 40px rgba(0, 162, 255, 0.473);
+  /* min-height: 85vh; */
+}
+
+
+.Signup {
+  background-image: url(/background.png);
+  background-size: cover;
+  z-index: -1; 
+  /* background: aliceblue; */
+  font-family: "Open Sans", Helvetica;
+  border-radius: 25px;
+  width: 360px;
+  margin: auto;
+  margin-top: 20vh;
+  border: 1px solid rgb(44, 177, 254);
+  box-shadow: 25px 40px 40px rgba(0, 162, 255, 0.473);
+}
+
+.roundInput {
+  border-radius: 25px;
+  border: 1px solid rgb(44, 177, 254);
+  color: rgb(44, 177, 254);
+  padding: 1vh;
+  margin: 1vh;
 }
 
 .copyright {
@@ -290,4 +332,20 @@ footer {
 
 .act {
   padding-left: 1vw;
+}
+
+.x {
+  margin-left: 1vw;
+}
+
+.y {
+  margin-left: 2.75vw;
+}
+
+.z {
+  margin-left: 1vw;
+}
+
+.xyz {
+  margin-bottom: 3vh;
 }
