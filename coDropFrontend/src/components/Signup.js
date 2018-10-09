@@ -54,7 +54,7 @@ class Signup extends Component {
           <label>Email</label>
           <input type="text" name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
 
-          <button>Signdup</button>
+          <button>Signup</button>
         </form>
       </div>
     );
