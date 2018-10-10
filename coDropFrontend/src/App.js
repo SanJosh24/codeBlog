@@ -8,23 +8,69 @@ import Login from './components/Login';
 import LandingPage from './components/LandingPage';
 import Signup from './components/Signup';
 import ClanList from './components/ClanList';
+import AuthService from './components/auth/auth-service';
+
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = { loggedInUser: null };
+    this.service = new AuthService();
+  }
+
+  fetchUser = () => {
+    if( this.state.loggedInUser === null ){
+      this.service.loggedin()
+      .then(response =>{
+        this.setState({
+          loggedInUser:  response
+        }) 
+      })
+      .catch( err =>{
+        this.setState({
+          loggedInUser:  false
+        }) 
+      })
+    }
+  }
+
+  getTheUser= (userObj) => {
+    this.setState({
+      loggedInUser: userObj
+    })
+  }
+
   render() {
-    return (
-      <div className="App">
-        <Navbar />
-        {/* <LandingPage /> */}
-        <Switch>
+    this.fetchUser()
+    // if(this.state.loggedInUser){
+      return (
+        <div className="App">
+          <Navbar userInSession={this.state.loggedInUser} getUser = {this.getTheUser} />
+          <Switch>
           <Route exact path="/" component={LandingPage}/>      
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/signup" component={Signup}/>
+          <Route exact path="/login" render={() => <Login getUser={this.getTheUser}/>}/>
           <Route exact path="/blogs" component={BlogsList}/>
           <Route exact path="/blogs/:id" component={BlogsDetails}/>
           <Route exact path="/clans" component={ClanList}/>
+          <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
+          <Route exact path="/login" component={Login}/>
         </Switch>
-      </div>
-    );
+        </div>
+      );
+    // } else {
+    //   return (
+    //     <div className="App">
+    //       <Navbar userInSession={this.state.loggedInUser} />
+    //       <Switch>
+    //         <Route exact path="/" component={LandingPage}/>
+            {/* <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/> */}
+            {/* <Route exact path="/login" component={Login}/> */}
+    //         <Route exact path="/blogs" component={BlogsList}/>
+    //         <Route exact path="/clans" component={ClanList}/>
+    //       </Switch>
+    //     </div>
+    //   );
+    // }
   }
 }
 
