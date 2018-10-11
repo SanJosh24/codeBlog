@@ -109,8 +109,28 @@ nav > button {
   border-radius: 200px;
   margin-top:75px;
   margin-left: 45px;
-  box-shadow: 10px 10px 10px 10px rgba(0, 162, 255, 0.281);
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.281);
   background: aliceblue;
+}
+
+.blogs {
+  border: 1px solid rgb(44, 177, 254);
+  border-radius: 200px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.281);
+  background: aliceblue;
+  margin: 2vh;
+  width: 25vw;
+  margin-left: 34.5vw;
+}
+
+.favoriteBlogs {
+  border: 1px solid rgb(39, 243, 56);
+  border-radius: 200px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.281);
+  background: rgb(214, 255, 218);
+  margin: 2vh;
+  width: 25vw;
+  margin-left: 34.5vw;
 }
 
 .splat {
@@ -368,4 +388,9 @@ footer {
   margin: 3vw;
   margin-top: 1vh;
   box-shadow: 25px 40px 40px rgba(0, 0, 0, 0.473);
+}
+
+.description {
+  width: 25vw;
+  /* height: 25vh; */
 }
