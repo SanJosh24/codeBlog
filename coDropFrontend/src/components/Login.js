@@ -24,6 +24,7 @@ class Login extends Component {
         // this.setState({username: "", password: "", email: ""});
         this.setState({loggedInUser: response});
         this.props.getUser(response)
+        this.props.history.push('/')
     })
     .catch( error => console.log('=-=-=-=-=-=-=-=-=-=-=-',error) )
     // console.log(this.state);
@@ -47,7 +48,9 @@ class Login extends Component {
           <label>Password</label>
           <input type="password" name="password" value={this.state.password} onChange={e => this.handleChange(e)} className="roundInput z"/>
           <br/>
+          {/* <Link to = "/"> */}
           <button type="submit" className="buttonz xyz">Login</button>
+          {/* </Link> */}
           <p className="noAccount">Don't have account? <Link to="/signup" className="whiteLink">Signup</Link></p>
         </form>
         </div>

@@ -9,6 +9,7 @@ import LandingPage from './components/LandingPage';
 import Signup from './components/Signup';
 import ClanList from './components/ClanList';
 import AuthService from './components/auth/auth-service';
+import ProfilePage from './components/ProfilePage';
 
 
 class App extends Component {
@@ -46,14 +47,15 @@ class App extends Component {
       return (
         <div className="App">
           <Navbar userInSession={this.state.loggedInUser} getUser = {this.getTheUser} />
-          <Switch>
+        <Switch>
           <Route exact path="/" component={LandingPage}/>      
-          <Route exact path="/login" render={() => <Login getUser={this.getTheUser}/>}/>
+          <Route exact path="/login" render={props => <Login {...props} getUser={this.getTheUser}/>}/>
           <Route exact path="/blogs" component={BlogsList}/>
           <Route exact path="/blogs/:id" component={BlogsDetails}/>
           <Route exact path="/clans" component={ClanList}/>
-          <Route exact path='/signup' render={() => <Signup getUser={this.getTheUser}/>}/>
+          <Route exact path='/signup' render={(props) => <Signup {...props} getUser={this.getTheUser}/>}/>
           <Route exact path="/login" component={Login}/>
+          <Route exact path="/profile/:id" render={(props) => <ProfilePage {...props} userInSession={this.state.loggedInUser}/>}/>
         </Switch>
         </div>
       );

@@ -10,8 +10,12 @@ class Navbar extends Component {
     this.service = new AuthService();
   }
 
+  componentWillMount() {
+    this.setState({ loggedInUser: this.props.userInSession});
+  }
+
   componentWillReceiveProps(nextProps) {
-    this.setState({...this.state, loggedInUser: nextProps["userInSession"]})
+    this.setState({ loggedInUser: nextProps.userInSession });
   }
 
   logoutUser = () =>{
@@ -26,7 +30,7 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log("current state of the user ^^^^^^^^^^^^^^^^^^^^ ", this.state);
+    console.log("current state of the user ^^^^^^^^^^^^^^^^^^^^ ", this.props);
     if(this.state.loggedInUser){
       return(
       <div className="Navbar">
@@ -41,7 +45,7 @@ class Navbar extends Component {
           <Link to = "/clans">
           <button className="buttonz">Clans</button>
           </Link>
-          <Link to = "/profile/:">
+          <Link to = {`/profile/${this.props.userInSession._id}`}>
           <button className="buttonz">My Profile</button>
           </Link>
           <Link to = "/signup">
