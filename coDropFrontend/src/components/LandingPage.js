@@ -49,23 +49,23 @@ class LandingPage extends Component {
 					<div className="part3gifs">
 						<div className="writer">
 							<img src="/becomeBetterWriter.gif" />
-							<h3>Become a better writer!</h3>
+							<h3 className="wh">Become a better writer!</h3>
 						</div>
 						<div className="network">
 							<img src="/buildNetwork.gif" />
-							<h3>Build a Network!</h3>
+							<h3 className="wh">Build a Network!</h3>
 						</div>
 						<div className="express">
 							<img src="/expressYourself.gif" />
-							<h3>Express yourself!</h3>
+							<h3 className="wh">Express yourself!</h3>
 						</div>
 						<div className="control">
 							<img src="/takeControlOfOnlineIdentity.gif" />
-							<h3>Take control of your online identity!</h3>
+							<h3 className="wh">Take control of your online identity!</h3>
 						</div>
 						<div className="influence">
 							<img src="/gainInfluence.gif" />
-							<h3>Gain influence!</h3>
+							<h3 className="wh">Gain influence!</h3>
 						</div>
 					</div>
 				</div>

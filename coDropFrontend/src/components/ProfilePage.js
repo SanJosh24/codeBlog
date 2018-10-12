@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class ProfilePage extends Component {
   constructor(props){
@@ -75,7 +76,9 @@ class ProfilePage extends Component {
       return (
         this.state.theProfile.blogs.map((blog, index) => {
          return <div className= "blogs" key={index}>
+           <Link to = {`/blogs/${blog._id}`}>
             <h3> {blog.title} </h3>
+           </Link>
             <p>{blog.description}</p>
           </div>
         })
@@ -89,7 +92,9 @@ class ProfilePage extends Component {
       return (
         this.state.othersBlogs.map((blog, index) => {
           return <div className= "favoriteBlogs" key={index}>
+          <Link to = {`/blogs/${blog._id}`}>
             <h3>{blog.title}</h3>
+          </Link>
             <p>{blog.description}</p>
           </div>
         })
@@ -107,7 +112,7 @@ class ProfilePage extends Component {
       return (
         <div className="ProfilePage">
           <div className="profileHead">
-            <h1>{this.state.loggedInUser && this.state.loggedInUser.username}'s Profile</h1>
+            <h1>{this.state.loggedInUser && this.state.loggedInUser.username}</h1>
             <h3>Post</h3>
 
             <form onSubmit={this.handleFormSubmit}>
@@ -123,9 +128,10 @@ class ProfilePage extends Component {
             </form>
 
           <br/>
-
+        <div className="allBlogs">
           {this.showUserBlogs()}
           {this.showFavoriteUserBlogs()}
+        </div>
           </div>
       </div>
     );
