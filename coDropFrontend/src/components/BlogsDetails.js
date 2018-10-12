@@ -16,7 +16,7 @@ class BlogsDetails extends Component {
 
   getSingleBlog = () => {
     const { params } = this.props.match;
-    axios.get(`http://localhost:5000/api/blogs/${params.id}`)
+    axios.get(process.env.REACT_APP_BASE_URL + `/blogs/${params.id}`)
     .then( responseFromApi =>{
         const theBlog = responseFromApi.data;
         this.setState(theBlog);
@@ -42,7 +42,7 @@ class BlogsDetails extends Component {
   deleteProject = () => {
       
     const { params } = this.props.match;
-    axios.delete(`http://localhost:5000/api/blogs/${params.id}`)
+    axios.delete(process.env.REACT_APP_BASE_URL + `/blogs/${params.id}`)
     .then( responseFromApi =>{
         this.props.history.push('/blogs'); // !!!         
     })
