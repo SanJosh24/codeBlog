@@ -51,7 +51,7 @@ class App extends Component {
           <Route exact path="/" component={LandingPage}/>      
           <Route exact path="/login" render={props => <Login {...props} getUser={this.getTheUser}/>}/>
           <Route exact path="/blogs" component={BlogsList}/>
-          <Route exact path="/blogs/:id" component={BlogsDetails}/>
+          <Route exact path="/blogs/:id" render={props => <BlogsDetails {...props} userInSession={this.state.loggedInUser}/>}/>
           <Route exact path="/clans" component={ClanList}/>
           <Route exact path='/signup' render={(props) => <Signup {...props} getUser={this.getTheUser}/>}/>
           <Route exact path="/login" component={Login}/>

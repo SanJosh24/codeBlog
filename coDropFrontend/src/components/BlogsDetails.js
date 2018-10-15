@@ -10,6 +10,14 @@ class BlogsDetails extends Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    this.setState({ loggedInUser: this.props.userInSession });
+  }
+
+  componentWillReceiveProps(nextprops){
+    this.setState({ loggedInUser: nextprops.userInSession });
+  }
+
   componentDidMount() {
     this.getSingleBlog();
   }
@@ -40,20 +48,23 @@ class BlogsDetails extends Component {
 
     // DELETE PROJECT:
   deleteProject = () => {
-      
-    const { params } = this.props.match;
-    axios.delete(process.env.REACT_APP_BASE_URL + `/blogs/${params.id}`)
-    .then( responseFromApi =>{
-        this.props.history.push('/blogs'); // !!!         
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+      if(this.state.owner === this.state.loggedInUser._id) {
+
+        const { params } = this.props.match;
+        axios.delete(process.env.REACT_APP_BASE_URL + `/blogs/${params.id}`)
+        .then( responseFromApi =>{
+          this.props.history.push('/blogs'); // !!!         
+        })
+        .catch((err)=>{
+          console.log(err)
+        })
+      }
   }
 
 
   render() {
     const BlogId = (this.props.match.params.id);
+    // console.log(this.state.loggedInUser);
 
     return (
       <div className="BlogsDetails">
@@ -61,7 +72,7 @@ class BlogsDetails extends Component {
         
         <h1>{this.state.title}</h1>
         <p>{this.state.description}</p>
-        <button onClick={() => this.deleteProject()}></button>
+        <button onClick={() => this.deleteProject()}>Delete</button>
 
         {this.renderEditForm()}
 
