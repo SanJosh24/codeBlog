@@ -6,8 +6,17 @@ class EditBlog extends Component {
     super(props);
     this.state = {
         title: this.props.theBlog.title, 
-        description: this.props.theBlog.description
+        description: this.props.theBlog.description,
+        owner: this.props.theBlog.owner
     }
+  }
+
+  componentWillMount() {
+    this.setState({ loggedInUser: this.props.userInSession });
+  }
+
+  componentWillReceiveProps(nextprops){
+    this.setState({ loggedInUser: nextprops.userInSession });
   }
 
     
@@ -38,7 +47,25 @@ class EditBlog extends Component {
     })
   }
 
+  deleteProject = () => {
+    if(this.state.owner === this.state.loggedInUser._id) {
+
+      const { params } = this.props.match;
+      axios.delete(process.env.REACT_APP_BASE_URL + `/blogs/${params.id}`)
+      .then( responseFromApi =>{
+        this.props.history.push('/blogs'); // !!!         
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+}
+
   render(){
+
+    console.log("thiiiiiiis is the state bruhhhhh!!!",this.state);
+    
+
     return (
       <div>
         <hr />
@@ -51,6 +78,8 @@ class EditBlog extends Component {
           
           <input type="submit" value="Submit" />
         </form>
+
+        <button onClick={() => this.deleteProject()}>Delete</button>
       </div>
     )
   }
